@@ -1,5 +1,6 @@
 package com.hellofresh.challenge;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -92,10 +93,11 @@ public class WebTest {
         driver.findElement(By.id("email")).sendKeys(existingUserEmail);
         driver.findElement(By.id("passwd")).sendKeys(existingUserPassword);
         driver.findElement(By.id("SubmitLogin")).click();
+        
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Women"))).click();
         driver.findElement(By.xpath("//a[@title='Faded Short Sleeve T-shirts']/ancestor::li")).click();
-        driver.findElement(By.xpath("//a[@title='Faded Short Sleeve T-shirts']/ancestor::li")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("Submit"))).click();
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='layer_cart']//a[@class and @title='Proceed to checkout']"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class,'cart_navigation')]/a[@title='Proceed to checkout']"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("processAddress"))).click();
@@ -110,5 +112,10 @@ public class WebTest {
         assertTrue(driver.findElement(By.xpath("//li[@id='step_end' and @class='step_current last']")).isDisplayed());
         assertTrue(driver.findElement(By.xpath("//*[@class='cheque-indent']/strong")).getText().contains("Your order on My Store is complete."));
         assertTrue(driver.getCurrentUrl().contains("controller=order-confirmation"));
+    }
+
+    @After
+    public void tearDown() {
+        driver.close();
     }
 }
