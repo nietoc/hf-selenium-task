@@ -39,5 +39,15 @@
       <artifactId>logback-classic</artifactId>
       <version>1.0.13</version>
     </dependency>
+    <dependency>
+      <groupId>io.github.benas</groupId>
+      <artifactId>random-beans-randomizers</artifactId>
+      <version>3.7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.benas</groupId>
+      <artifactId>random-beans-jodatime</artifactId>
+      <version>3.7.0</version>
+    </dependency>
   </dependencies>
 </project>

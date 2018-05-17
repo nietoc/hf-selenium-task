@@ -1,5 +1,6 @@
 package com.hellofresh.challenge.steps;
 
+import com.hellofresh.challenge.helper.AccountDetails;
 import com.hellofresh.challenge.pages.AccountCreationPage;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -14,26 +15,27 @@ public class AccountCreationSteps {
         accountCreationPage = new AccountCreationPage(driver, wait);
     }
 
-    public void fillAccountDetails(String firstName, String lastName) {
-        log.info("Creating a new account for '{} {}'",  firstName, lastName);
+    public void fillAccountDetails(AccountDetails accountDetails) {
+        log.info("Creating a new account for '{} {}'",  accountDetails.getFirstName(), accountDetails.getLastName());
+        log.debug("Full account details: {}", accountDetails);
 
         accountCreationPage.selectMrsTitle();
-        accountCreationPage.fillFirstName(firstName);
-        accountCreationPage.fillLastName(lastName);
-        accountCreationPage.fillPassword("Qwerty");
-        accountCreationPage.selectBirthDay("1");
-        accountCreationPage.selectBirthMonth("1");
-        accountCreationPage.selectBirthYear("2000");
-        accountCreationPage.fillCompany("Company");
-        accountCreationPage.fillAddress1("Qwerty, 123");
-        accountCreationPage.fillAddress2("zxcvb");
-        accountCreationPage.fillCity("Qwerty");
-        accountCreationPage.selectState("Colorado");
-        accountCreationPage.fillPostCode("12345");
-        accountCreationPage.fillOther("Qwerty");
-        accountCreationPage.fillPhone("12345123123");
-        accountCreationPage.fillMobile("12345123123");
-        accountCreationPage.fillAlias("hf");
+        accountCreationPage.fillFirstName(accountDetails.getFirstName());
+        accountCreationPage.fillLastName(accountDetails.getLastName());
+        accountCreationPage.fillPassword(accountDetails.getPassword());
+        accountCreationPage.selectBirthDay(accountDetails.getBirthDate().dayOfMonth().getAsString());
+        accountCreationPage.selectBirthMonth(accountDetails.getBirthDate().monthOfYear().getAsString());
+        accountCreationPage.selectBirthYear(accountDetails.getBirthDate().year().getAsString());
+        accountCreationPage.fillCompany(accountDetails.getCompany());
+        accountCreationPage.fillAddress1(accountDetails.getAddress1());
+        accountCreationPage.fillAddress2(accountDetails.getAddress2());
+        accountCreationPage.fillCity(accountDetails.getCity());
+        accountCreationPage.selectState(accountDetails.getState());
+        accountCreationPage.fillPostCode(accountDetails.getPostCode());
+        accountCreationPage.fillOther(accountDetails.getOther());
+        accountCreationPage.fillPhone(accountDetails.getPhone());
+        accountCreationPage.fillMobile(accountDetails.getMobile());
+        accountCreationPage.fillAlias(accountDetails.getAlias());
     }
 
     public void submit() {

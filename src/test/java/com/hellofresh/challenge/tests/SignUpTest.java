@@ -1,12 +1,11 @@
 package com.hellofresh.challenge.tests;
 
+import com.hellofresh.challenge.helper.AccountDetails;
 import com.hellofresh.challenge.steps.AccountCreationSteps;
 import com.hellofresh.challenge.steps.LoginSteps;
 import com.hellofresh.challenge.steps.MyAccountSteps;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Date;
 
 public class SignUpTest extends BaseTest {
 
@@ -25,19 +24,15 @@ public class SignUpTest extends BaseTest {
     public void signUpTest() {
         loginSteps.goToLoginPage();
 
-        String timestamp = String.valueOf(new Date().getTime());
-        String email = "hf_challenge_" + timestamp + "@hf" + timestamp.substring(7) + ".com";
-        String name = "Firstname";
-        String surname = "Lastname";
-        String fullName = name + " " + surname;
+        AccountDetails accountDetails = new AccountDetails();
 
-        loginSteps.startAccountCreation(email);
+        loginSteps.startAccountCreation(accountDetails.getEmail());
 
-        accountCreationSteps.fillAccountDetails(name, surname);
+        accountCreationSteps.fillAccountDetails(accountDetails);
         accountCreationSteps.submit();
 
         myAccountSteps.assertMyAccountDisplayed();
-        myAccountSteps.assertLoggedInAs(fullName);
+        myAccountSteps.assertLoggedInAs(accountDetails.getFullName());
     }
 
 }
