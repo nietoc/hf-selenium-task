@@ -22,6 +22,11 @@ public class LoginSteps {
     public void login(String email, String password) {
         loginPage.fillEmail(email);
         loginPage.fillPassword(password);
-        loginPage.submit();
+        loginPage.login();
+    }
+
+    public void startAccountCreation(String email) {
+        loginPage.fillCreateAccountEmail(email);
+        loginPage.clickCreateAccount();
     }
 }

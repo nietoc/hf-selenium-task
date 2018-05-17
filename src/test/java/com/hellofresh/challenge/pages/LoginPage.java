@@ -16,6 +16,12 @@ public class LoginPage extends BasePage {
     @FindBy(id = "SubmitLogin")
     private WebElement submitBtn;
 
+    @FindBy(id = "email_create")
+    private WebElement createAccountEmailField;
+
+    @FindBy(id = "SubmitCreate")
+    private WebElement createAccountBtn;
+
     public LoginPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -28,7 +34,15 @@ public class LoginPage extends BasePage {
         passwordField.sendKeys(value);
     }
 
-    public void submit() {
+    public void login() {
         submitBtn.click();
+    }
+
+    public void fillCreateAccountEmail(String value) {
+        createAccountEmailField.sendKeys(value);
+    }
+
+    public void clickCreateAccount() {
+        createAccountBtn.click();
     }
 }
