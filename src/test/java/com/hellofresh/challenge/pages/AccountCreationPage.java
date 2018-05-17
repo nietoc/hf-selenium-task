@@ -140,6 +140,7 @@ public class AccountCreationPage extends BasePage {
     }
 
     public void fillAlias(String value) {
+        aliasField.clear();
         aliasField.sendKeys(value);
     }
 

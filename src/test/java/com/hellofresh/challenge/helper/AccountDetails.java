@@ -47,7 +47,7 @@ public class AccountDetails {
         setOther(SentenceRandomizer.aNewSentenceRandomizer().getRandomValue());
         setPhone(RandomStringUtils.randomNumeric(11));
         setMobile(RandomStringUtils.randomNumeric(11));
-        setAlias(RandomStringUtils.randomNumeric(1, 33));
+        setAlias(RandomStringUtils.randomAlphanumeric(1, 33));
     }
 
     public String getFullName() {
