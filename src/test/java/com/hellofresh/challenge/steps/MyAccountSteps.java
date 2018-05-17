@@ -6,8 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 @Slf4j
 public class MyAccountSteps {
@@ -20,20 +21,20 @@ public class MyAccountSteps {
 
     public void assertMyAccountDisplayed() {
         WebElement heading = myAccountPage.waitForVisibilityOfHeaderLocated();
-        assertEquals("MY ACCOUNT", heading.getText());
+        assertThat(heading.getText(), is("MY ACCOUNT"));
     }
 
     private void assertUsernameDisplayed(String expected) {
         String username = myAccountPage.getUsernameDisplayed();
         log.debug("Logged in user: '{}'", username);
 
-        assertEquals(expected, username);
+        assertThat(username, is(expected));
     }
 
     public void assertLoggedInAs(String fullName) {
         assertUsernameDisplayed(fullName);
-        assertTrue(myAccountPage.getAccountInfoText().contains("Welcome to your account."));
-        assertTrue(myAccountPage.isLogoutDisplayed());
-        assertTrue(myAccountPage.isOnMyAccountController());
+        assertThat(myAccountPage.getAccountInfoText(), containsString("Welcome to your account."));
+        assertThat(myAccountPage.isLogoutDisplayed(), is(true));
+        assertThat(myAccountPage.isOnMyAccountController(), is(true));
     }
 }

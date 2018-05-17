@@ -6,8 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 @Slf4j
 public class OrderConfirmationSteps {
@@ -24,21 +25,21 @@ public class OrderConfirmationSteps {
         asserOrderConfirmationDisplayed();
         assertOrderStepFourDisplayed();
         assertLastOrderStepDisplayed();
-        assertTrue(orderConfirmationPage.getOrderCompleteText().contains("Your order on My Store is complete."));
-        assertTrue(orderConfirmationPage.isOnOrderConfirmationController());
+        assertThat(orderConfirmationPage.getOrderCompleteText(), containsString("Your order on My Store is complete."));
+        assertThat(orderConfirmationPage.isOnOrderConfirmationController(), is(true));
     }
 
     private void asserOrderConfirmationDisplayed() {
         WebElement heading = orderConfirmationPage.waitForVisibilityOfHeaderLocated();
-        assertEquals("ORDER CONFIRMATION", heading.getText());
+        assertThat(heading.getText(), is("ORDER CONFIRMATION"));
     }
 
     private void assertOrderStepFourDisplayed() {
-        assertTrue(orderConfirmationPage.isOrderStepFourDisplayed());
+        assertThat(orderConfirmationPage.isOrderStepFourDisplayed(), is(true));
     }
 
     private void assertLastOrderStepDisplayed() {
-        assertTrue(orderConfirmationPage.isLastOrderStepDisplayed());
+        assertThat(orderConfirmationPage.isLastOrderStepDisplayed(), is(true));
     }
 
 }
