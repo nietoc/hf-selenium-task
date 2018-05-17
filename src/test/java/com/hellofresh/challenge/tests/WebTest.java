@@ -1,38 +1,20 @@
-package com.hellofresh.challenge;
+package com.hellofresh.challenge.tests;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Date;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-public class WebTest {
-    WebDriver driver;
-    WebDriverWait wait;
-
-    String existingUserEmail = "hf_challenge_123456@hf12345.com";
-    String existingUserPassword = "12345678";
-
-    @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10, 50);
-        driver.get("http://automationpractice.com/index.php");
-    }
+public class WebTest extends BaseTest {
 
     @Test
-    public void signInTest() {
+    public void signUpTest() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login"))).click();
         String timestamp = String.valueOf(new Date().getTime());
         String email = "hf_challenge_" + timestamp + "@hf" + timestamp.substring(7) + ".com";
@@ -72,28 +54,11 @@ public class WebTest {
     }
 
     @Test
-    public void logInTest() {
-        String fullName = "Joe Black";
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login"))).click();
-        driver.findElement(By.id("email")).sendKeys(existingUserEmail);
-        driver.findElement(By.id("passwd")).sendKeys(existingUserPassword);
-        driver.findElement(By.id("SubmitLogin")).click();
-        WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1")));
-
-        assertEquals("MY ACCOUNT", heading.getText());
-        assertEquals(fullName, driver.findElement(By.className("account")).getText());
-        assertTrue(driver.findElement(By.className("info-account")).getText().contains("Welcome to your account."));
-        assertTrue(driver.findElement(By.className("logout")).isDisplayed());
-        assertTrue(driver.getCurrentUrl().contains("controller=my-account"));
-    }
-
-    @Test
     public void checkoutTest() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login"))).click();
         driver.findElement(By.id("email")).sendKeys(existingUserEmail);
         driver.findElement(By.id("passwd")).sendKeys(existingUserPassword);
         driver.findElement(By.id("SubmitLogin")).click();
-        
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Women"))).click();
         driver.findElement(By.xpath("//a[@title='Faded Short Sleeve T-shirts']/ancestor::li")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("Submit"))).click();
@@ -114,8 +79,5 @@ public class WebTest {
         assertTrue(driver.getCurrentUrl().contains("controller=order-confirmation"));
     }
 
-    @After
-    public void tearDown() {
-        driver.close();
-    }
+
 }
