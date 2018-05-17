@@ -1,6 +1,7 @@
 package com.hellofresh.challenge.steps;
 
 import com.hellofresh.challenge.pages.OrderConfirmationPage;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -8,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@Slf4j
 public class OrderConfirmationSteps {
 
     private OrderConfirmationPage orderConfirmationPage;
@@ -17,6 +19,8 @@ public class OrderConfirmationSteps {
     }
 
     public void assertOrderConfirmed() {
+        log.info("Verifying the order is confirmed...");
+
         asserOrderConfirmationDisplayed();
         assertOrderStepFourDisplayed();
         assertLastOrderStepDisplayed();

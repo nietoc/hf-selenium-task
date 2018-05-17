@@ -1,9 +1,11 @@
 package com.hellofresh.challenge.steps;
 
 import com.hellofresh.challenge.pages.CheckoutPage;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+@Slf4j
 public class CheckoutSteps {
 
     private CheckoutPage checkoutPage;
@@ -33,6 +35,8 @@ public class CheckoutSteps {
     }
 
     public void confirmOrder() {
+        log.debug("Confirming the order...");
+
         checkoutPage.clickConfirmOrder();
     }
 
