@@ -10,6 +10,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>4.11</junit.version>
     <selenium.version>3.11.0</selenium.version>
+    <webdriver.factory.version>4.3</webdriver.factory.version>
     <lombok.version>1.16.20</lombok.version>
     <slf4j.version>1.7.25</slf4j.version>
     <logback.version>1.0.13</logback.version>
@@ -24,6 +25,11 @@
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>ru.stqa.selenium</groupId>
+      <artifactId>webdriver-factory</artifactId>
+      <version>${webdriver.factory.version}</version>
     </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>

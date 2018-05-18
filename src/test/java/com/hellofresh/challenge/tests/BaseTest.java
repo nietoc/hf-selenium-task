@@ -7,9 +7,10 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.stqa.selenium.factory.WebDriverPool;
 
 import java.io.File;
 
@@ -51,10 +52,10 @@ public abstract class BaseTest {
     private WebDriver getDriver(String browser) {
         if (browser.equalsIgnoreCase("firefox")) {
             System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
-            return new FirefoxDriver();
+            return WebDriverPool.DEFAULT.getDriver(new FirefoxOptions());
         } else if(browser.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-            return new ChromeDriver();
+            return WebDriverPool.DEFAULT.getDriver(new ChromeOptions());
         } else {
             throw new RuntimeException(String.format("Browser %s is not supported", browser));
         }
@@ -62,7 +63,7 @@ public abstract class BaseTest {
 
     @After
     public void tearDown() {
-        driver.quit();
+        WebDriverPool.DEFAULT.dismissDriver(driver);
     }
 
 }
